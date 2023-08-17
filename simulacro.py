@@ -32,15 +32,99 @@ with open ('PetShopping.json') as clientes:
         puichico['servicios']=elem['servicios']
         dataPetShop['pets'].append(puichico)
 
+def listarMascotas():
+    cont=0
+    for elem in dataPetShop['pets']:
+        cont+=1
+        print(f"{cont}.")
+        print(f"> Tipo:{elem['tipo']}")
+        print(f"> Raza:{elem['raza']}")
+        print(f"> Precio:{elem['precio']}")
+        print("Servicios: ")
+        max=len(elem['servicios'])
+        for i in range (0,max):
+            print(f'{i+1}. {elem["servicios"][i]}')
+
+
+def agregarMascota():
+    print("***REGISTRO***")
+    tipo=input(">> Tipo: ")
+    raza=input(">> Raza: ")
+    talla=input(">> Talla (grande/mediano/pequeño): ")
+    precio=int(input(">> Precio: "))
+    servicios=input("Ingrese los servicios separados por comas (','): ")
+    listServicios=servicios.split(",")
+    dataPetShop['pets'].append({
+        "tipo":tipo,
+        "raza":raza,
+        "talla":talla,
+        "precio":precio,
+        "servicios":listServicios
+    })
+
+def actualizarTipo():
+
+
+def opcionesCambio():
+    print("***OPCIONES***")
+    print("1. Tipo.")
+    print("2. Raza.")
+    print("3. Talla.")
+    print("4. Precio.")
+    print("5. Servicios.")
+    print("6. Ninguno.")
+
+    op=int(input("Opcion -> "))
+    if op==1:
+        actualizarTipo()
+    if op==2:
+        actualizarRaza()
+
+    if op==3:
+        actualizarTalla()
+    if op==4:
+        actualizarPrecio()
+    if op==5:
+        actualizarServicios()
+
+def buscarMascota():
+    listarMascotas()
+    r=int(input("Cual mascota desea modificar?. (Ingrese el indice): "))
+    len(dataPetShop['pets'])
+    indiMascota=r-1
+
+def actualizarDatos():
+    buscarMascota()
+    
+    print("Que dato desea actualizar?")
+    opcionesCambio()
+
 
 def menu():
     seguir=True 
     while seguir:
         print("-"*10,"TIENDA DE MASCOTAS","-"*10)
-        print(">>MENU<<")
+        print(">> MENU:")
+        print("1. Mostrar todas las mascotas.")
+        print("2. Agregar mascota.")
+        print("3. Actualizar datos de mascota.")
+        print("4. Eliminar mascota.")
+        print("5. Salir del programa")
         
-        break
+        op=int(input("Opcion -> "))
 
+        if op==1:
+            listarMascotas()
+        if op==2:
+            agregarMascota()
+        if op==3:
+            actualizarDatos()
+        if op==4:
+            eliminar()
+        if op==5:
+            print("Gracias por utilizar el programa... Suerte!")
+            seguir=False
 
+        
 
 menu()
